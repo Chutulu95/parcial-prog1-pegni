@@ -1,5 +1,8 @@
 from validaciones import pedir_nombre, validar_nota
 
+PROMEDIO_PROMOCION = 6
+PROMEDIO_APROBACION = 4
+
 
 def crear_lista(cantidad, valor_inicial):
     lista = []
@@ -32,6 +35,53 @@ def calcular_promedios(notas1, notas2):
     return promedios
 
 
+def calcular_promedio_general(promedios):
+    acumulador = 0
+    for i in range(len(promedios)):
+        acumulador = acumulador + promedios[i]
+    return acumulador / len(promedios)
+
+
+def buscar_indice_mejor(promedios):
+    indice_mejor = 0
+    for i in range(1, len(promedios)):
+        if promedios[i] > promedios[indice_mejor]:
+            indice_mejor = i
+    return indice_mejor
+
+
+def buscar_indice_peor(promedios):
+    indice_peor = 0
+    for i in range(1, len(promedios)):
+        if promedios[i] < promedios[indice_peor]:
+            indice_peor = i
+    return indice_peor
+
+
+def contar_promocionan(promedios):
+    contador = 0
+    for i in range(len(promedios)):
+        if promedios[i] >= PROMEDIO_PROMOCION:
+            contador = contador + 1
+    return contador
+
+
+def contar_aprueban(promedios):
+    contador = 0
+    for i in range(len(promedios)):
+        if PROMEDIO_APROBACION <= promedios[i] < PROMEDIO_PROMOCION:
+            contador = contador + 1
+    return contador
+
+
+def contar_desaprueban(promedios):
+    contador = 0
+    for i in range(len(promedios)):
+        if promedios[i] < PROMEDIO_APROBACION:
+            contador = contador + 1
+    return contador
+
+
 def mostrar_alumno(nombres, nota1, nota2, promedios, posicion):
     print("Alumno:", nombres[posicion])
     print("Parcial 1:", nota1[posicion])
@@ -44,3 +94,16 @@ def mostrar_listado(nombres, nota1, nota2, promedios):
         if i > 0:
             print()
         mostrar_alumno(nombres, nota1, nota2, promedios, i)
+
+
+def mostrar_estadisticas(nombres, promedios):
+    indice_mejor = buscar_indice_mejor(promedios)
+    indice_peor = buscar_indice_peor(promedios)
+    print("Promedio general:", calcular_promedio_general(promedios))
+    print("Mejor promedio:", nombres[indice_mejor],
+          "con", promedios[indice_mejor])
+    print("Peor promedio:", nombres[indice_peor],
+          "con", promedios[indice_peor])
+    print("Promocionan:", contar_promocionan(promedios))
+    print("Aprueban:", contar_aprueban(promedios))
+    print("Desaprueban:", contar_desaprueban(promedios))
