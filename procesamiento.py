@@ -107,3 +107,32 @@ def mostrar_estadisticas(nombres, promedios):
     print("Promocionan:", contar_promocionan(promedios))
     print("Aprueban:", contar_aprueban(promedios))
     print("Desaprueban:", contar_desaprueban(promedios))
+
+
+def ordenar_burbuja(nombres, notas1, notas2, promedios):
+    cantidad = len(promedios)
+    for pasada in range(cantidad - 1):
+        for i in range(cantidad - 1 - pasada):
+            if promedios[i] < promedios[i + 1]:
+                # Intercambio con variable auxiliar, lista por lista
+                auxiliar = promedios[i]
+                promedios[i] = promedios[i + 1]
+                promedios[i + 1] = auxiliar
+
+                auxiliar = nombres[i]
+                nombres[i] = nombres[i + 1]
+                nombres[i + 1] = auxiliar
+
+                auxiliar = notas1[i]
+                notas1[i] = notas1[i + 1]
+                notas1[i + 1] = auxiliar
+
+                auxiliar = notas2[i]
+                notas2[i] = notas2[i + 1]
+                notas2[i + 1] = auxiliar
+
+
+def mostrar_ranking(nombres, nota1, nota2, promedios):
+    ordenar_burbuja(nombres, nota1, nota2, promedios)
+    for i in range(len(nombres)):
+        print(i + 1, "-", nombres[i], "| Promedio:", promedios[i])
