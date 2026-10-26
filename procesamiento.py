@@ -136,3 +136,25 @@ def mostrar_ranking(nombres, nota1, nota2, promedios):
     ordenar_burbuja(nombres, nota1, nota2, promedios)
     for i in range(len(nombres)):
         print(i + 1, "-", nombres[i], "| Promedio:", promedios[i])
+
+
+def buscar_alumno(nombres, nombre_buscado):
+    for i in range(len(nombres)):
+        if nombres[i] == nombre_buscado:
+            return i
+    return -1
+
+
+def pedir_posicion_alumno(nombres):
+    nombre = input("Ingrese el nombre del alumno: ")
+    print()
+    posicion = buscar_alumno(nombres, nombre)
+    if posicion == -1:
+        print("El alumno no existe.")
+    return posicion
+
+
+def mostrar_busqueda(nombres, nota1, nota2, promedios):
+    posicion = pedir_posicion_alumno(nombres)
+    if posicion != -1:
+        mostrar_alumno(nombres, nota1, nota2, promedios, posicion)
