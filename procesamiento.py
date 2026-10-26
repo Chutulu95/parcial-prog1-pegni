@@ -1,4 +1,4 @@
-"""En este modulo esta el nucleo de todo el programa, por favor usese con respeto, cualquier consulta contactenos"""
+"""En este modulo esta el nucleo de todo el programa"""
 
 
 from validaciones import pedir_nombre, validar_nota
@@ -12,7 +12,7 @@ PROMEDIO_APROBACION = 4
 
 def crear_lista(cantidad, valor_inicial):
     """Crea una lista vacia con la cantidad necesaria"""
-    # La lista va a estar vacia hasta que se rellene con los datos que se piden despues
+    # Los elementos se reemplazan después con los datos que se piden
     lista = []
     for i in range(cantidad):
         lista = lista + [valor_inicial]
@@ -21,8 +21,8 @@ def crear_lista(cantidad, valor_inicial):
 
 def cargar_datos(nombres, nota1, nota2, cantidad):
     """Pide los datos de los alumnos"""
-    # Recorre el dato para validarlo con las funciones correspodientes
-    # Guarda esos datos en las listas creadas anteriormente, modificandolas sin necesidad de retornar nada
+    # Las funciones de validaciones se encargan de controlar cada dato
+    # Se modifican las listas recibidas, por eso no hace falta retornar
     for i in range(cantidad):
         print()
         print("Alumno", i + 1)
@@ -32,8 +32,8 @@ def cargar_datos(nombres, nota1, nota2, cantidad):
 
 
 def hay_alumnos(cantidad):
-    "Chequea que haya datos cargados, si no hay se avisa"
-    # Sirve para los case 2-6, ya que esos funcionan solo si hay datos almacenados en las lista
+    """Chequea que haya datos cargados, si no hay se avisa"""
+    # Sirve para los case 2-6, que necesitan datos
     if cantidad == 0:
         print("No ingresaste nada, volve a la opcion 1 para continuar.")
         return False
@@ -51,8 +51,8 @@ def calcular_promedios(notas1, notas2):
 
 
 def calcular_promedio_general(promedios):
-    """"Calcula el promedio general del curso"""
-    # Va sumando todos los promedios y despues los divide por la cantidad de alumnos (promedios)
+    """Calcula el promedio general del curso"""
+    # Suma todos los promedios y divide por la cantidad de alumnos
     acumulador = 0
     for i in range(len(promedios)):
         acumulador = acumulador + promedios[i]
@@ -81,7 +81,7 @@ def buscar_posicion_peor(promedios):
 
 def contar_promocionan(promedios):
     """Cuenta la cantidad de alumnos con promedio = or > 6"""
-    # For recorre todos los promedios y si cumple la condicon se suma a contador
+    # Si el promedio cumple la condición, se suma 1 al contador
     contador = 0
     for i in range(len(promedios)):
         if promedios[i] >= PROMEDIO_PROMOCION:
@@ -91,7 +91,7 @@ def contar_promocionan(promedios):
 
 def contar_aprueban(promedios):
     """Cuenta la cantidad de alumnos con promedio entre 4 y 6"""
-    # For recorre todos los promedios y si cumple la condicon se suma a contador
+    # Si el promedio cumple la condición, se suma 1 al contador
     contador = 0
     for i in range(len(promedios)):
         if PROMEDIO_APROBACION <= promedios[i] < PROMEDIO_PROMOCION:
@@ -101,7 +101,7 @@ def contar_aprueban(promedios):
 
 def contar_desaprueban(promedios):
     """Cuenta la cantidad de alumnos con promedio < 4"""
-    # For recorre todos los promedios y si cumple la condicon se suma a contador
+    # Si el promedio cumple la condición, se suma 1 al contador
     contador = 0
     for i in range(len(promedios)):
         if promedios[i] < PROMEDIO_APROBACION:
@@ -110,8 +110,8 @@ def contar_desaprueban(promedios):
 
 
 def mostrar_alumno(nombres, nota1, nota2, promedios, posicion):
-    """Busca el alumno ingresado en las listas guardadas"""
-    # Con el dato ingresado busca la posicion y luego muestra todo lo necesitado
+    """Muestra los datos del alumno que está en la posición indicada"""
+    # Las listas son paralelas: la misma posición es el mismo alumno
     print("Alumno:", nombres[posicion])
     print("Parcial 1:", nota1[posicion])
     print("Parcial 2:", nota2[posicion])
@@ -119,7 +119,7 @@ def mostrar_alumno(nombres, nota1, nota2, promedios, posicion):
 
 
 def mostrar_listado(nombres, nota1, nota2, promedios):
-    """Muestra todos los alumnos usando de argumentos las listas que tremos de main"""
+    """Muestra todos los alumnos con sus notas y su promedio."""
     # Por cada vuelta del for muestra un alumno
     for i in range(len(nombres)):
         if i > 0:
@@ -130,7 +130,7 @@ def mostrar_listado(nombres, nota1, nota2, promedios):
 
 def mostrar_estadisticas(nombres, promedios):
     """Llama a todas las funciones de datos y los muestra"""
-    # No calcula nada, todo ya esta en su funcion
+    # No calcula nada, cada dato lo da su propia funcion
     posicion_mejor = buscar_posicion_mejor(promedios)
     posicion_peor = buscar_posicion_peor(promedios)
     print("Promedio general:", calcular_promedio_general(promedios))
@@ -144,7 +144,7 @@ def mostrar_estadisticas(nombres, promedios):
 
 
 def ordenar_burbuja(nombres, notas1, notas2, promedios):
-    """Ordena de mayor a menor"""
+    """Ordena las listas de mayor a menor"""
     cantidad = len(promedios)
     for pasada in range(cantidad - 1):
         for i in range(cantidad - 1 - pasada):
@@ -169,7 +169,7 @@ def ordenar_burbuja(nombres, notas1, notas2, promedios):
 
 
 def mostrar_ranking(nombres, nota1, nota2, promedios):
-    """Llama a burbuja para mostar completo los datos"""
+    """Ordena el curso de mejor a peor promedio y lo muestra"""
     ordenar_burbuja(nombres, nota1, nota2, promedios)
     for i in range(len(nombres)):
         print(i + 1, "-", nombres[i], "| Promedio:", promedios[i])

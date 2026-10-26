@@ -35,7 +35,6 @@ def main():
                 nota2 = crear_lista(cantidad, 0)
                 cargar_datos(nombres, nota1, nota2, cantidad)
                 promedios = calcular_promedios(nota1, nota2)
-        # Obviamente no van a funcionar si primero no hay dato que usar, no me hagas hacer laburo doble
             case "2":
                 if hay_alumnos(cantidad):
                     mostrar_listado(nombres, nota1, nota2, promedios)
@@ -55,6 +54,6 @@ def main():
                 print("¡Hasta luego, gracias por la oportunidad!")
             case _:
                 print("Opcion inexistente, volve a intentarlo.")
-
+        # Obviamente no van a funcionar si no hay datos
 
 main()

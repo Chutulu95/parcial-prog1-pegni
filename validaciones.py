@@ -1,4 +1,4 @@
-"""En este modulo nos encontramos con las funciones que validan el correcto ingreso de los datos solicitados, usese a gusto"""
+"""Módulo con las funciones que validan los datos ingresados"""
 
 
 CANTIDAD_MINIMA = 1
@@ -10,7 +10,7 @@ LARGO_MINIMO_NOMBRE = 5
 
 
 def validar_entero(mensaje, minimo, maximo):
-    """Se pide un numero ENTERO hasta que sea valido segun que funcion lo necesite"""    
+    """Se pide un numero entero entre min y max"""
     valido = False
     numero = 0
  
@@ -38,20 +38,20 @@ def validar_entero(mensaje, minimo, maximo):
  
 def validar_cantidad():
     """Pide la cantidad de alumnos"""
-    # No hacen falta argumentos ya que la funcion validar_entero ya los tiene
+    # No hacen falta argumentos, los limites son constantes
     mensaje = "Ingrese la cantidad de alumnos (1 - 30): "
     return validar_entero(mensaje, CANTIDAD_MINIMA, CANTIDAD_MAXIMA)
  
  
 def validar_nota(parcial):
-    """"Pide la nota de los parciales"""
-    # El argumento parcial es "primer" o "segundo" en la funcion cargar_datos
+    """Pide la nota de los parciales"""
+    # El argumento parcial es "primer" o "segundo" se usa en cargar_datos
     mensaje = "Ingrese la nota del " + parcial + " parcial: "
     return validar_entero(mensaje, NOTA_MINIMA, NOTA_MAXIMA)
 
 
 def validar_nombre(nombre):
-    """Simplemente chequea que el nombre ingresado cumpla las condiciones correctas"""
+    """Chequea que el nombre ingresado cumpla las condiciones correctas"""
     if len(nombre) < LARGO_MINIMO_NOMBRE:
         return False
     
@@ -73,7 +73,7 @@ def pedir_nombre():
     """Pide el nombre de un alumno hasta que sea válido."""
     nombre = input("Ingrese el nombre y apellido del alumno: ")
 
-# Pedimos el nombre la cantidad de veces necesarias hasta que validar_nombre de el ok y se pueda proceder
+# Pedimos el nombre hasta que validar_nombre de el ok
     while not validar_nombre(nombre):
         print("¡Error!, mínimo 5 caracteres, solo letras y espacios")
         nombre = input("Ingrese el nombre y apellido del alumno: ")
