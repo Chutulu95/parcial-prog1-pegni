@@ -1,5 +1,6 @@
 from validaciones import validar_cantidad
-from procesamiento import (mostrar_busqueda, crear_lista, cargar_datos, hay_alumnos, calcular_promedios, mostrar_listado, mostrar_estadisticas, mostrar_ranking) 
+from procesamiento import (jugar_con_nombre, mostrar_busqueda, crear_lista, cargar_datos, hay_alumnos, calcular_promedios, mostrar_listado, mostrar_estadisticas, mostrar_ranking) 
+
 
 def main():
     cantidad = 0
@@ -16,6 +17,7 @@ def main():
         print("3. Mostrar estadísticas")
         print("4. Ver ranking")
         print("5. Buscar alumno")
+        print("6. Juegos con un nombre")
         print("0. Salir")
         opcion = input("Elegí una opción: ")
         print()
@@ -39,6 +41,9 @@ def main():
             case "5":
                 if hay_alumnos(cantidad):
                     mostrar_busqueda(nombres, nota1, nota2, promedios)
+            case "6":
+                if hay_alumnos(cantidad):
+                    jugar_con_nombre(nombres)
             case "0":
                 print("¡Hasta luego!")
             case _:

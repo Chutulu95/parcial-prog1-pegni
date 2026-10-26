@@ -1,5 +1,6 @@
 from validaciones import pedir_nombre, validar_nota
 
+VOCALES = "aeiouAEIOU"
 PROMEDIO_PROMOCION = 6
 PROMEDIO_APROBACION = 4
 
@@ -158,3 +159,33 @@ def mostrar_busqueda(nombres, nota1, nota2, promedios):
     posicion = pedir_posicion_alumno(nombres)
     if posicion != -1:
         mostrar_alumno(nombres, nota1, nota2, promedios, posicion)
+
+
+def es_vocal(caracter):
+    for i in range(len(VOCALES)):
+        if caracter == VOCALES[i]:
+            return True
+    return False
+
+
+def contar_vocales(nombre):
+    contador = 0
+    for i in range(len(nombre)):
+        if es_vocal(nombre[i]):
+            contador = contador + 1
+    return contador
+
+
+def invertir_nombre(nombre):
+    invertido = ""
+    for i in range(len(nombre) - 1, -1, -1):
+        invertido = invertido + nombre[i]
+    return invertido
+
+
+def jugar_con_nombre(nombres):
+    posicion = pedir_posicion_alumno(nombres)
+    if posicion != -1:
+        nombre = nombres[posicion]
+        print("Cantidad de vocales:", contar_vocales(nombre))
+        print("Nombre invertido:", invertir_nombre(nombre))
