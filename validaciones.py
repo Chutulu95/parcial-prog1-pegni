@@ -2,6 +2,7 @@ CANTIDAD_MINIMA = 1
 CANTIDAD_MAXIMA = 30
 NOTA_MINIMA = 0
 NOTA_MAXIMA = 10
+LARGO_MINIMO_NOMBRE = 5
 
 
 def validar_entero_en_rango(mensaje, minimo, maximo):
@@ -37,3 +38,32 @@ def validar_cantidad():
 def validar_nota(numero_parcial):
     mensaje = "Ingrese la nota del " + numero_parcial + " parcial (0 - 10): "
     return validar_entero_en_rango(mensaje, NOTA_MINIMA, NOTA_MAXIMA)
+
+
+def validar_nombre(nombre):
+    """Devuelve True si el nombre tiene 5 o más caracteres y solo letras."""
+    if len(nombre) < LARGO_MINIMO_NOMBRE:
+        return False
+
+    for i in range(len(nombre)):
+        caracter = nombre[i]
+
+        minuscula = "a" <= caracter <= "z"
+        mayuscula = "A" <= caracter <= "Z"
+        espacio = caracter == " "
+
+        if not (minuscula or mayuscula or espacio):
+            return False
+
+    return True
+
+
+def pedir_nombre():
+    """Pide el nombre de un alumno hasta que sea válido."""
+    nombre = input("Ingrese el nombre del alumno: ")
+
+    while not validar_nombre(nombre):
+        print("Error, mínimo 5 caracteres y solo letras y espacios")
+        nombre = input("Ingrese el nombre del alumno: ")
+
+    return nombre
